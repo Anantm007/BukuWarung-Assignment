@@ -30,7 +30,7 @@ const TopBar = ({ limit, setLimit, properties, handleChange }) => {
             id="limit"
             name="limit"
             type="number"
-            InputProps={{ inputProps: { min: 0, max: limit } }}
+            InputProps={{ inputProps: { min: 0 } }}
             value={limit}
             style={{ width: "3rem" }}
             onChange={(e) => setLimit(e.target.value)}
