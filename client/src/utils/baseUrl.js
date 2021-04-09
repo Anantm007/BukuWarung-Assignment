@@ -6,7 +6,7 @@ function evalURL() {
   } else if (window.location.href.includes("localhost")) {
     return "http://localhost:5055";
   } else {
-    return "http://18.224.165.248:5055";
+    return "https://api-bukuwarung.anantmathur.me";
   }
 }
 
