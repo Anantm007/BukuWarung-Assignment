@@ -67,7 +67,6 @@ const TopBar = ({ limit, setLimit, properties, handleChange }) => {
           </Fragment>
         }
       </p>
-
       <Button
         className={classes.addButton}
         variant="contained"
@@ -75,7 +74,11 @@ const TopBar = ({ limit, setLimit, properties, handleChange }) => {
       >
         + ADD USER RECORD
       </Button>
-
+      <h2 style={{ textAlign: "left" }}>
+        *click on the name of any user to edit/delete
+      </h2>
+      <br />
+      <br />
       <Dialog
         open={open}
         onClose={handleClose}
