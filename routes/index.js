@@ -31,6 +31,31 @@ router.get("/users", async (req, res) => {
 });
 
 /**
+ * @route   GET /api/users/count
+ * @desc    Get all records
+ * @access  Public
+ */
+router.get("/users/count", async (req, res) => {
+  try {
+    const users = await User.find({}).select("_id");
+    const lengthOfUsers = users.length;
+
+    // No users found
+    if (!users) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No Records found!", count: 0 });
+    }
+
+    // Return the count
+    return res.status(200).json({ success: true, count: lengthOfUsers });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ success: false, message: error });
+  }
+});
+
+/**
  * @route   GET /api/users/:id
  * @desc    Get a particular reocord
  * @access  Public
