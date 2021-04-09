@@ -38,12 +38,18 @@ app.use(cors());
 // Dev Middleware
 app.use(morgan("dev"));
 
-// Test Route
-app.get("/", async (req, res) => {
-  return res.status(200).json({ success: true, message: "API Running" });
-});
 // Mounting the routes
 app.use("/api", require("./routes/index"));
+
+// Serve Static Assets in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, "client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 
 // Starting the server
 const PORT = process.env.PORT || 5055;
