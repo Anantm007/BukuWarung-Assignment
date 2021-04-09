@@ -86,4 +86,4 @@ This repository contains code for a sample leaderboard made as a part of fronten
 
 ## Routes
 
-1. / - The home page route containing the leaderboard and options to filter the results
+- / - The home/landing page route containing the leaderboard and options to filter the results
