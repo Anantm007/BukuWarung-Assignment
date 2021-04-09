@@ -43,7 +43,11 @@ const Landing = () => {
         properties={properties}
         handleChange={handleChange}
       />
-      <LeaderboardTable properties={properties} />
+      <LeaderboardTable
+        properties={properties}
+        limit={limit}
+        setLimit={setLimit}
+      />
     </Fragment>
   );
 };

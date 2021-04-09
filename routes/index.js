@@ -121,7 +121,7 @@ router.put("/users/:id", async (req, res) => {
   try {
     const newData = req.body;
 
-    let user = await User.findById(req.params.id).select("id");
+    const user = await User.findById(req.params.id).select("id");
 
     // No user found
     if (!user) {
@@ -131,11 +131,13 @@ router.put("/users/:id", async (req, res) => {
     }
 
     // Update the record and return
-    user = await User.findByIdAndUpdate(req.params.id, newData, { new: true });
+    await User.findByIdAndUpdate(req.params.id, newData, { new: true });
+
+    const users = await User.find();
 
     return res
       .status(200)
-      .json({ success: true, message: "Record updated successfully", user });
+      .json({ success: true, message: "Record updated successfully", users });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ success: false, message: error });

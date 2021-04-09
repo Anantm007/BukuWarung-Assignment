@@ -20,7 +20,7 @@ import {
 import { getAllRecords } from "./apiLeaderboard";
 import { sortUsers } from "../../utils/sortUsers";
 
-const LeaderboardTable = ({ properties }) => {
+const LeaderboardTable = ({ properties, limit, setLimit }) => {
   const classes = useStyles();
 
   // State
@@ -41,7 +41,8 @@ const LeaderboardTable = ({ properties }) => {
       const sortedUsers = await sortUsers(
         data.users,
         properties.order,
-        properties.attribute
+        properties.attribute,
+        limit
       );
 
       setUsers(sortedUsers);
@@ -55,7 +56,7 @@ const LeaderboardTable = ({ properties }) => {
   // useEffect hook to fetch user data
   useEffect(() => {
     fetchUsers();
-  }, [properties]); // eslint-disable-line
+  }, [limit, properties]); // eslint-disable-line
 
   return (
     <Fragment>
@@ -67,12 +68,12 @@ const LeaderboardTable = ({ properties }) => {
         >
           <TableHead>
             <TableRow className={classes.head}>
-              <StyledTableCell align="left">RANK</StyledTableCell>
-              <StyledTableCell align="left" style={{ width: "30%" }}>
+              <StyledTableCell align="center">RANK</StyledTableCell>
+              <StyledTableCell align="center" style={{ width: "30%" }}>
                 AVATAR
               </StyledTableCell>
-              <StyledTableCell align="left">NAME</StyledTableCell>
-              <StyledTableCell align="left">CREDITS</StyledTableCell>
+              <StyledTableCell align="center">NAME</StyledTableCell>
+              <StyledTableCell align="center">CREDITS</StyledTableCell>
             </TableRow>
           </TableHead>
           {loading ? (
@@ -80,7 +81,16 @@ const LeaderboardTable = ({ properties }) => {
           ) : (
             <TableBody>
               {users.map((user, index) => (
-                <LeaderboardTableRecord key={index} user={user} index={index} />
+                <LeaderboardTableRecord
+                  key={index}
+                  properties={properties}
+                  user={user}
+                  users={users}
+                  setUsers={setUsers}
+                  limit={limit}
+                  setLimit={setLimit}
+                  index={index}
+                />
               ))}
             </TableBody>
           )}
@@ -97,6 +107,11 @@ const useStyles = makeStyles({
 });
 
 const StyledTableCell = withStyles((theme) => ({
+  root: {
+    borderRightWidth: 1,
+    borderRightColor: "lightgrey",
+    borderRightStyle: "solid",
+  },
   head: {
     backgroundColor: "#696969",
     color: "#fff",

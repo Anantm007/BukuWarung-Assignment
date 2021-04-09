@@ -1,4 +1,4 @@
-export const sortUsers = async (users, order, attribute) => {
+export const sortUsers = async (users, order, attribute, limit = 100) => {
   const sortedUsers = users.sort(function (a, b) {
     if (order === "ascending") {
       if (a[attribute] > b[attribute]) {
@@ -19,6 +19,5 @@ export const sortUsers = async (users, order, attribute) => {
     return 0;
   });
 
-  console.log(sortedUsers);
-  return sortedUsers;
+  return sortedUsers.slice(0, limit);
 };
