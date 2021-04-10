@@ -2,6 +2,8 @@
 
 #### Deployed Application:
 
+https://bukuwarung.anantmathur.me/
+or
 http://18.224.165.248:3007/
 
 ## About the Project
